@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres:16.2-alpine
+    container_name: bogdanmarkiewka_assignment
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgrespass
+      POSTGRES_USER: postgres
+      POSTGRES_DB: assignment
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/init_users.csv:/docker-entrypoint-initdb.d/init_users.csv
+      - ./db/init_meetings.csv:/docker-entrypoint-initdb.d/init_meetings.csv
+      - ./db/init_user_meeting.csv:/docker-entrypoint-initdb.d/init_user_meeting.csv
+    ports:
+      - "5432:5432"
+
+#  web:
+#    build: .
+#    restart: always
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/assignment
+#      SPRING_DATASOURCE_USERNAME: example
+#      SPRING_DATASOURCE_PASSWORD: example
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#    depends_on:
+#      - db

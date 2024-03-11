@@ -1,0 +1,40 @@
+
+### Create user
+
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+  "name": "Jan Nowacki",
+  "email": "jan.nowacki@assignement-test.pl"
+}
+
+### Create meeting (Darth Vader && Walter White)
+
+POST http://localhost:8080/api/meetings
+Content-Type: application/json
+
+{
+  "time": "2024-04-01T14:00:00Z",
+  "userIds": [
+    "9236ebdf-72f6-48d1-b050-b9892fde2c55",
+    "47c2ea2d-85f4-43f8-9d55-5bdc7407d2c2"
+  ]
+}
+
+### Get upcoming meetings by user (Darth Vader)
+
+GET http://localhost:8080/api/meetings/upcoming/9236ebdf-72f6-48d1-b050-b9892fde2c55
+
+### Get available slots for list of users (Jan Kowalski && Darth Vader)
+
+POST http://localhost:8080/api/meetings/available-slots
+Content-Type: application/json
+
+{
+  "userIds": [
+    "2a17d738-1c08-4358-8b62-bdf9c3b9c3ca",
+    "9236ebdf-72f6-48d1-b050-b9892fde2c55"
+  ],
+  "startRange": "2024-04-01T10:00:00Z"
+}
